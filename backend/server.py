@@ -31,7 +31,9 @@ class Users(Resource):
 
 class Addresses(Resource):
     def get(self):
-        return addresses
+        response = jsonify(addresses)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
     
 @app.route('/addresses/<userId>')
 def addressesByUserId(userId):
