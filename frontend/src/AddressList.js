@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 const AddressList = () => {
   const [listItems, setListItems] = useState([]);
-
-  const backendUrl = 'http://localhost:5002/addresses';
-  fetch(backendUrl)
+  
+  async function fetchData() {
+    const backendUrl = 'http://localhost:5002/addresses';
+    fetch(backendUrl)
     .then((response) => {
       return response.json()
     })
@@ -25,6 +26,13 @@ const AddressList = () => {
     .catch((error) => {
       console.log(error);
     });
+  }
+
+  useEffect(() => {
+
+    fetchData();
+  
+  }, []);
 
   return (
     <div className="AddressList">
